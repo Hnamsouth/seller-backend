@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/sso/db.changelog-sso.yaml
+  - include:
+      file: liquibase/warehouse/address/db.changelog-warehouse-address.yaml
+  - include:
+      file: liquibase/product-approval/db.changelog-product-approval.yaml
+  - include:
+      file: liquibase/phase5/db.changelog-phase5.yaml
+  - include:
+      file: liquibase/phase6/db.phase6.withdrawal-request.01-create-tables.yaml
+  - include:
+      file: liquibase/product-approval/db.changelog-is-deleted-product-approval.yaml

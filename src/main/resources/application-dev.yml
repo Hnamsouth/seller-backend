@@ -1,0 +1,233 @@
+server:
+  port: 8800
+
+spring:
+  application:
+    name: vipo-seller
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://100.100.0.43:3306/voso
+    username: vipo
+    password: matkhau
+    hikari:
+      max-lifetime: 45000
+      maximum-pool-size: 20
+      minimum-idle: 2
+      idle-timeout: 30000
+      leak-detection-threshold: 30000
+      initialization-fail-timeout: 30000
+      connection-timeout: 30000
+      login-timeout: 30000
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.yaml
+    enabled: ${ENABLE_LIQUIBASE:true}
+    database-change-log-table: liquibase_seller_database_changelog
+    database-change-log-lock-table: liquibase_seller_database_changelog_lock
+    liquibase-schema: ${DB_SCHEMA:voso}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    database-platform: org.hibernate.dialect.MySQLDialect
+  data:
+    redis:
+      host: 100.100.0.16
+      port: 6379
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  kafka:
+    bootstrap-servers: "${KAFKA_SERVER}"
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org.quartz.jobStore.isClustered: true
+      org.quartz.jobStore.clusterCheckinInterval: 20000
+      org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+      org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+      org.quartz.scheduler.instanceId: AUTO
+      org.quartz.scheduler.instanceName: spring-boot-quartz-cluster
+      org.quartz.jobStore.useProperties: true
+      org.quartz.jobStore.dataSource: quartzDataSource
+      org.quartz.dataSource.quartzDataSource.driver: com.mysql.cj.jdbc.Driver
+      org.quartz.dataSource.quartzDataSource.URL: jdbc:mysql://100.100.0.43:3306/voso
+      org.quartz.dataSource.quartzDataSource.user: vipo
+      org.quartz.dataSource.quartzDataSource.password: matkhau
+      org.quartz.dataSource.quartzDataSource.maxConnections: 5
+    overwrite-existing-jobs: true
+
+security:
+  vipo:
+    secret-key:
+      class-path: keys/secret_key.pem
+      secret-key-jwt: d?7_6_w&0M
+
+    exp:
+      jwt-access: 604800000  # 30 minute (30 * 60 * 1000 milliseconds)  ==> up code ập nhật thành:  jwt-access: 1800000  # 30 minute (30 * 60 * 1000 milliseconds)
+      jwt-refresh: 604800000 # 8 hour (8 * 60 * 60 * 1000 milliseconds)
+
+aws:
+  s3:
+    endpoint-url: https://s3user10106.s3.cloudstorage.com.vn
+    bucket-name: vipo-dev
+    access-key: s3user10106
+    secret-key: bfJdWZ+mtyrx8Wui2/dDfDHPJs1IvX0yrRotNzgS
+    region: ${AWS_S3_REGION:}
+    connection-timeout: ${AWS_S3_CONNECTION_TIMEOUT:5s}
+    socket-timeout: ${AWS_S3_SOCKET_TIMEOUT:25s}
+    proxy-host: ${AWS_S3_PROXY_HOST:}
+    proxy-port: ${AWS_S3_PROXY_PORT:}
+    isProd: ${AWS_S3_IS_PROD:false}
+    upload-image:
+      max-retries: ${AWS_S3_UPLOAD_MAX_RETRIES:3}
+      retry-delay: ${AWS_S3_UPLOAD_RETRY_DELAY:1s}
+
+MOIT:
+  account: '0522890947'
+
+template:
+  product:
+    create:
+#      vi: https://evtp2-dev.s3user10106.s3.cloudstorage.com.vn/evtp2-dev/%2F3644972a-9ef7-4aea-b59d-a2198a75a035.xlsx
+      vi: https://s3user10106.s3.cloudstorage.com.vn/vipo-dev/vipo-dev/%2F67552156-a482-490f-a89b-84cc8a39bd51.xlsx
+#      en: https://evtp2-dev.s3user10106.s3.cloudstorage.com.vn/evtp2-dev/%2F9c0321f7-a87f-476e-8782-d23a69a27141.xlsx
+      en: https://s3user10106.s3.cloudstorage.com.vn/vipo-dev/vipo-dev/%2F8f2a08cf-32de-4a08-8453-1bd733022c3d.xlsx
+
+custom:
+  product:
+    description:
+      min-length: 50
+      max-length: 5000
+  properties:
+    cache:
+      in-memory:
+        type: CAFFEINE
+        properties:
+          orderStatusCache:
+            cache-name: orderStatusCache
+            expiredTime: 5m
+            maximumSize: 10000
+          countryIdToCountryCache:
+            cache-name: countryIdToCountryCache
+            expiredTime: 1d
+            maximumSize: 300
+          countriesCache:
+            cache-name: countriesCache
+            expiredTime: 1d
+            maximumSize: 300
+    vtpapi-client-url: https://apivtp-dev.viettelpost.vn
+    s3:
+      vipo-bucket:
+        name: vipo-dev
+        order-package-export:
+          key-prefix: order-package-export-
+        revenue-export:
+          key-prefix: revenue-export-
+    report-export:
+      cleanup:
+        duration: PT1H
+        cron: "0 59 23 * * ?"
+        cron-dev: "0 0 * * * ?"
+      sheet-name: Data
+    excel-workbook:
+      window-size: 100
+    total-visits:
+      cron: "0 0/5 * * * ?"
+    revenue-report:
+      cron: "0 1 0 * * ?"
+    job-key:
+      prefix: dev-
+    withdraw-request:
+      maximum-export-time: 5m
+      list-export:
+        file-name: DanhSachQuanLyYeuCau.xlsx
+    financial-statement:
+      maximum-export-time: 5m
+      maximum-export-order-package-num: 1000000
+      maximum-withdrawal-item-num: 1000000
+    kafka:
+      bootstrap-servers: "${KAFKA_SERVER}"
+      consumer:
+        max:
+          timeout: "${KAFKA_CONSUMER_TIMEOUT}"
+      topic:
+        retries-event:
+          name: "RETRIES_EVENT"
+        vipo-seller-order-package-export-excel:
+          name: "vipo-seller-order-package-export-excel"
+          concurrent:
+            thread: 4
+        vipo-seller-order-package-export-excel-retries:
+          name: "${custom.properties.kafka.topic.vipo-seller-order-package-export-excel.name}.#{'${spring.application.name}'.toUpperCase()}.RETRIES"
+        vipo-seller-order-package-export-excel-dlq:
+          name: "${custom.properties.kafka.topic.vipo-seller-order-package-export-excel.name}.#{'${spring.application.name}'.toUpperCase()}.DLQ"
+        vipo-seller-revenue-export:
+          name: "vipo-seller-revenue-export"
+          concurrent:
+            thread: 4
+        vipo-seller-revenue-export-retries:
+          name: "${custom.properties.kafka.topic.vipo-seller-revenue-export.name}.#{'${spring.application.name}'.toUpperCase()}.RETRIES"
+        vipo-seller-revenue-export-dlq:
+          name: "${custom.properties.kafka.topic.vipo-seller-revenue-export.name}.#{'${spring.application.name}'.toUpperCase()}.DLQ"
+
+    messaging:
+      consumer:
+        pool:
+          size: "${KAFKA_CONSUMER_POOL}"
+          thread:
+            name:
+              prefix: "messaging-thread-pool-"
+      kafka:
+        groupId: "${spring.application.name}"
+        consumer:
+          batch: false
+          number:
+            of:
+              message:
+                in:
+                  batch: 1
+    graceful:
+      shutdown:
+        messaging:
+          consumer:
+            wait:
+              time:
+                max: 300
+
+KAFKA_SERVER: 100.100.0.16:9093
+KAFKA_CONSUMER_POOL: 30
+KAFKA_CONSUMER_TIMEOUT: 1800000
+
+evtp:
+  account:
+    username: 0981245847
+    password: manhhungit1997
+  domain:
+    print-label-order: https://dev-print.viettelpost.vn
+  token: eyJhbGciOiJFUzI1NiJ9.eyJzdWIiOiIwOTgxMjQ1ODQ3IiwiVXNlcklkIjo3NzAwNjY5LCJGcm9tU291cmNlIjo1LCJUb2tlbiI6Ik84MkVQVFBYQ1ZUUTFCMkM4IiwiZXhwIjoxODIxOTQyNDc3LCJQYXJ0bmVyIjo3NzAwNjY5fQ.aw6TMmg9-VZFoLwy7ltyVHYhZ-a_4uL1XCLRM4dLgYrKEMnk-EfzXTQ-xV6ZDiI0bCNAVLaTKcE9pdFOtt5coQ
+  api:
+    get-short-term-partner-token: https://partnerdev.viettelpost.vn/v2/user/Login
+    get-long-term-partner-token: https://partnerdev.viettelpost.vn/v2/user/ownerconnect
+    get-client-token: https://partnerdev.viettelpost.vn/v2/user/ownerconnect
+    create-simplified-order: https://partnerdev.viettelpost.vn/v2/order/createOrderNlp
+    create-full-order: https://partnerdev.viettelpost.vn/v2/order/createOrder
+    print-label-order: https://partnerdev.viettelpost.vn/v2/order/printing-code
+    get-service-info: https://partnerdev.viettelpost.vn/v2/order/getPriceAll
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

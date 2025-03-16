@@ -1,0 +1,150 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-columns-to-merchant
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        and:
+          - not:
+              columnExists:
+                tableName: merchant
+                columnName: vtpUserId
+      changes:
+        - addColumn:
+            tableName: merchant
+            columns:
+              - column:
+                  name: vtpUserId
+                  type: BIGINT
+                  remarks: "ID user bên hệ thống VTP"
+        - tagDatabase:
+            tag: sso_1.0.0
+      rollback:
+        - dropColumn:
+            tableName: merchant
+            columnName: vtpUserId
+        - dropColumn:
+            tableName: merchant
+  - changeSet:
+      id: alter-password-datatype-column
+      author: anhdev
+      changes:
+        - tagDatabase:
+            tag: sso_1.0.0
+        - modifyDataType:
+            columnName: password
+            newDataType: varchar(255) null comment 'Mật khẩu'
+            tableName: merchant
+            remarks: 'Mật khẩu'
+
+  - changeSet:
+      id: alter-merchant-columns-with-vietnamese-data-and-charset-latin1
+      author: anhdev
+      preConditions:
+        onFail: HALT
+        and:
+          - tableExists:
+              tableName: merchant
+          - columnExists:
+              tableName: merchant
+              columnName: address
+          - columnExists:
+              tableName: merchant
+              columnName: fullAddress
+          - columnExists:
+              tableName: merchant
+              columnName: contactName
+      changes:
+        - tagDatabase:
+            tag: sso_1.0.1
+        - modifyDataType:
+            tableName: merchant
+            columnName: address
+            newDataType: TEXT CHARACTER SET utf8mb4
+            remarks: 'Địa chỉ'
+
+        - modifyDataType:
+            tableName: merchant
+            columnName: fullAddress
+            newDataType: TEXT CHARACTER SET utf8mb4
+            remarks: 'Địa chỉ chi tiết'
+
+        - modifyDataType:
+            tableName: merchant
+            columnName: contactName
+            newDataType: VARCHAR(255) CHARACTER SET utf8mb4
+            remarks: 'Họ tên'
+
+  - changeSet:
+      id: create-merchant-log-table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: merchant_log
+      changes:
+        - createTable:
+            tableName: merchant_log
+            remarks: "Table to log merchant actions"
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: "Primary key"
+
+              - column:
+                  name: merchantId
+                  type: INT
+                  defaultValue: 0
+                  constraints:
+                    nullable: true
+                  remarks: "merchant.id"
+
+              - column:
+                  name: staffId
+                  type: INT
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+                  remarks: "cms_user.id"
+
+              - column:
+                  name: action
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+                  remarks: "hành động"
+
+              - column:
+                  name: note
+                  type: TEXT
+                  constraints:
+                    nullable: true
+                  remarks: "ghi chú thêm"
+
+              - column:
+                  name: content
+                  type: TEXT
+                  constraints:
+                    nullable: true
+                  remarks: "nội dung log"
+
+              - column:
+                  name: data
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+                  remarks: "data cũ"
+
+              - column:
+                  name: createTime
+                  type: BIGINT
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+                  remarks: "thời gian"

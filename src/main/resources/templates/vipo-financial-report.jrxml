@@ -1,0 +1,911 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Blank_A4" language="java" columnCount="1" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6ab62695-be9e-40db-b5d4-7097e5cb02f3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FCFCFC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#E4E9ED">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#EDF6FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 6_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 6_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 7_TH" mode="Opaque" backcolor="#F7F7F7">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 7_CH" mode="Opaque" backcolor="#F5F5F5">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 7_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 8_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 8_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 8_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 9_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 9_CH" mode="Opaque" backcolor="#EE0033">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 9_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 10_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#F0F0F0"/>
+			<bottomPen lineWidth="0.5" lineColor="#F0F0F0"/>
+		</box>
+	</style>
+	<style name="Table 10_CH" mode="Opaque" backcolor="#EE0033">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#F0F0F0"/>
+			<bottomPen lineWidth="0.5" lineColor="#F0F0F0"/>
+		</box>
+	</style>
+	<style name="Table 10_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#F0F0F0"/>
+			<bottomPen lineWidth="0.5" lineColor="#F0F0F0"/>
+		</box>
+	</style>
+	<style name="Table 11_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 11_CH" mode="Opaque" backcolor="#EE0303">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 11_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 12_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 12_CH" mode="Opaque" backcolor="rgba(143, 146, 148, 0.03137255)">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 12_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 13_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 13_CH" mode="Opaque" backcolor="rgba(143, 146, 148, 0.03137255)">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 13_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 14_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 14_CH" mode="Opaque" backcolor="rgba(143, 146, 148, 0.03137255)">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 14_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 15_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 15_CH" mode="Opaque" backcolor="rgba(143, 146, 148, 0.03137255)">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<style name="Table 15_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#B9B9B9"/>
+			<bottomPen lineWidth="0.5" lineColor="#B9B9B9"/>
+		</box>
+	</style>
+	<dataset name="transferedPaymentSumaryDataset" uuid="12519908-37d2-4e3d-9a47-aa4032740e9f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<query language="sql"><![CDATA[]]></query>
+		<field name="sequenceNum" class="java.lang.Integer"/>
+		<field name="time" class="java.lang.String"/>
+		<field name="orderPackageCode" class="java.lang.String"/>
+		<field name="amount" class="java.lang.String"/>
+	</dataset>
+	<dataset name="productSumaryDataset" uuid="beea6bcb-be0f-4c1b-b8ee-4e9d0771ef37">
+		<query language="sql"><![CDATA[]]></query>
+		<field name="productName" class="java.lang.String"/>
+		<field name="productPercentage" class="java.lang.Double"/>
+	</dataset>
+	<dataset name="topProductDataset" uuid="936c1db4-55eb-4fa2-a3fd-d091b4318115">
+		<query language="sql"><![CDATA[]]></query>
+		<field name="sequenceNum" class="java.lang.String"/>
+		<field name="productName" class="java.lang.String"/>
+		<field name="quantity" class="java.lang.Integer"/>
+		<field name="originalPrice" class="java.lang.String"/>
+		<field name="negotiatedPrice" class="java.lang.String"/>
+		<field name="finalPrice" class="java.lang.String"/>
+		<field name="revenue" class="java.lang.String"/>
+		<field name="revenuePercentage" class="java.lang.String"/>
+	</dataset>
+	<dataset name="orderPackageRevenueDataset" uuid="4bf741b9-d1b6-4e63-af05-6b9c483fc444">
+		<query language="sql"><![CDATA[]]></query>
+		<field name="sequenceNum" class="java.lang.Integer"/>
+		<field name="time" class="java.lang.String"/>
+		<field name="orderPackageCode" class="java.lang.String"/>
+		<field name="amount" class="java.lang.String"/>
+		<field name="status" class="java.lang.String"/>
+	</dataset>
+	<parameter name="customerName" class="java.lang.String"/>
+	<parameter name="customerAddressDetail" class="java.lang.String"/>
+	<parameter name="customerWard" class="java.lang.String"/>
+	<parameter name="customerDistrict" class="java.lang.String"/>
+	<parameter name="customerProvince" class="java.lang.String"/>
+	<parameter name="reportStartDate" class="java.lang.String"/>
+	<parameter name="reportEndDate" class="java.lang.String"/>
+	<parameter name="customerBankAccountName" class="java.lang.String"/>
+	<parameter name="customerBankAccount" class="java.lang.String"/>
+	<parameter name="customerBankName" class="java.lang.String"/>
+	<parameter name="customerBankBranchName" class="java.lang.String"/>
+	<parameter name="customerAccount" class="java.lang.String"/>
+	<parameter name="vipoIconUrl" class="java.io.InputStream"/>
+	<parameter name="transferedPaymentSumaryDataset" class="net.sf.jasperreports.engine.JRResultSetDataSource"/>
+	<parameter name="productRevenueSum" class="java.lang.String"/>
+	<parameter name="productSumaryDataset" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="topProductDataset" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="orderPackageQuantity" class="java.lang.Long"/>
+	<parameter name="orderPackageDataset" class="net.sf.jasperreports.engine.JRResultSetDataSource"/>
+	<parameter name="totalCompletePaymentAmount" class="java.lang.String"/>
+	<parameter name="hasProductData" class="java.lang.Boolean"/>
+	<parameter name="hasOrderData" class="java.lang.Boolean"/>
+	<parameter name="hasWithdrawal" class="java.lang.Boolean"/>
+	<query language="sql"><![CDATA[]]></query>
+	<background splitType="Stretch"/>
+	<title height="178" splitType="Stretch">
+		<element kind="frame" uuid="19a6b89e-25ef-4448-8625-5d246ba6b3ec" mode="Opaque" x="2" y="-10" width="550" height="30" backcolor="#FC0D0D">
+			<element kind="image" uuid="c52ad99c-d4d8-42c1-be3d-bc54df729885" positionType="Float" stretchType="NoStretch" x="8" y="4" width="90" height="22" linkType="None" linkTarget="Self">
+				<expression><![CDATA[$P{vipoIconUrl}]]></expression>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+			<element kind="staticText" uuid="d7f20bc5-510d-4b38-8015-b20092d16984" positionType="Float" x="370" y="0" width="169" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="13.0" bold="false" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Báo cáo thu nhập]]></text>
+			</element>
+		</element>
+		<element kind="frame" uuid="4a03e037-da0b-4205-8e80-e2ee20d54ffa" x="2" y="26" width="548" height="121">
+			<element kind="frame" uuid="d8992b30-028b-42c5-98e1-87ad5c9d9e4d" x="9" y="0" width="171" height="111">
+				<element kind="textField" uuid="ae5f8b92-bd2a-4d62-a3ed-eea20b95bb6c" x="0" y="0" width="168" height="19" fontName="DejaVu Sans Condensed" fontSize="9.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA[$P{customerName}]]></expression>
+				</element>
+				<element kind="textField" uuid="cb410008-6a71-44d9-bd1d-224368798612" x="0" y="30" width="168" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA[$P{customerAddressDetail}]]></expression>
+				</element>
+				<element kind="textField" uuid="a8bd9a23-02fa-4d06-9e0c-67bc3fb0fb37" x="0" y="51" width="168" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA[$P{customerWard}]]></expression>
+				</element>
+				<element kind="textField" uuid="501694bd-21fa-4623-afe1-f9a45a012443" x="0" y="71" width="168" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA[$P{customerDistrict}]]></expression>
+				</element>
+				<element kind="textField" uuid="991e2346-321b-496c-ada0-31d57805375b" x="0" y="91" width="168" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA[$P{customerProvince}]]></expression>
+				</element>
+			</element>
+			<element kind="frame" uuid="26889e5d-d9d4-43ce-afd5-f2af20852d40" x="336" y="1" width="210" height="120">
+				<element kind="textField" uuid="5bc3847e-34fb-482d-ac0c-5361c39172e6" x="0" y="0" width="208" height="19" fontName="DejaVu Sans Condensed" fontSize="9.0" bold="true" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA["Báo cáo từ " + $P{reportStartDate} + " đến " + $P{reportEndDate}]]></expression>
+				</element>
+				<element kind="textField" uuid="f888c905-cbb1-4800-aa7f-868d861c2d9f" x="0" y="40" width="208" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA["Tên chủ tài khoản: " + $P{customerBankAccountName}]]></expression>
+				</element>
+				<element kind="textField" uuid="b6fcff14-cb63-4f7f-a87b-92abe97de61b" x="0" y="60" width="208" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA["Tài khoản ngân hàng: " + $P{customerBankAccount}]]></expression>
+				</element>
+				<element kind="textField" uuid="93adf00a-7e97-4a84-8262-3cf4e349f18b" x="0" y="80" width="208" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA["Tên ngân hàng: " + $P{customerBankName}]]></expression>
+				</element>
+				<element kind="textField" uuid="ac646034-5605-455a-b368-3114d9eb451d" x="0" y="100" width="208" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA["Chi nhánh: " + $P{customerBankBranchName}]]></expression>
+				</element>
+				<element kind="textField" uuid="86cf6e95-9089-4c15-8e44-9a6d6112a2d6" x="0" y="20" width="208" height="20" fontName="DejaVu Sans Condensed" fontSize="9.0" hTextAlign="Left" vTextAlign="Middle">
+					<expression><![CDATA["Tên đăng nhập: " + $P{customerAccount}]]></expression>
+				</element>
+			</element>
+		</element>
+		<element kind="staticText" uuid="3f07b6f2-25cc-4ef7-b13d-cc842c7fc50d" x="0" y="150" width="380" height="28" fontName="DejaVu Sans Condensed" fontSize="11.0" bold="true" italic="true" vTextAlign="Middle">
+			<text><![CDATA[Cảm ơn vì đã sử dụng VIPO Mall. Đây là tóm tắt nhanh:]]></text>
+		</element>
+	</title>
+	<detail>
+		<band height="387" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{hasProductData}]]></printWhenExpression>
+			<element kind="staticText" uuid="2ce36136-91e9-4644-bbe2-64177a014da0" stretchType="NoStretch" x="0" y="0" width="100" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Báo cáo sản phẩm]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="staticText" uuid="b2fa0a23-1b79-4780-9e67-9a064bde7bf0" stretchType="NoStretch" x="114" y="0" width="176" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Biểu đồ doanh thu theo sản phẩm]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="rectangle" uuid="0743b161-7092-4a3f-9fd9-cd9b3cc6a9b8" x="114" y="20" width="334" height="278" backcolor="rgba(255, 255, 255, 0.0)">
+				<pen lineWidth="0.5" lineStyle="Solid" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="1b596c6d-861c-4205-b005-481add859ffd" stretchType="NoStretch" x="130" y="40" width="220" height="30" forecolor="#6B6B6B" fontName="DejaVu Sans Condensed" fontSize="12.0" bold="false" hTextAlign="Left" vTextAlign="Middle">
+				<text><![CDATA[TỔNG DOANH THU SẢN PHẨM]]></text>
+			</element>
+			<element kind="textField" uuid="5c2e2d1d-6561-454e-9edb-cd290bae903a" positionType="Float" stretchType="NoStretch" x="130" y="70" width="318" height="30" fontName="DejaVu Sans Condensed" fontSize="21.0" textAdjust="StretchHeight" bold="true" hTextAlign="Left" vTextAlign="Middle">
+				<expression><![CDATA[$P{productRevenueSum}]]></expression>
+			</element>
+			<element kind="chart" chartType="pie" uuid="260e83fb-1dc3-480d-9149-1b4e4e0c0ca9" stretchType="NoStretch" x="114" y="116" width="334" height="182" showLegend="true" evaluationTime="Report" linkType="None" linkTarget="Self" legendPosition="Right" titlePosition="Bottom">
+				<titleFont fontName="DejaVu Sans Condensed" italic="true"/>
+				<legendFont fontName="DejaVu Sans Condensed" fontSize="10.0"/>
+				<dataset kind="pie">
+					<datasetRun uuid="801371bd-2c0a-4842-8459-92d052812667" subDataset="productSumaryDataset">
+						<dataSourceExpression><![CDATA[$P{productSumaryDataset}]]></dataSourceExpression>
+					</datasetRun>
+					<otherSectionHyperlink linkTarget="Self"/>
+					<series>
+						<keyExpression><![CDATA[$F{productName}]]></keyExpression>
+						<valueExpression><![CDATA[$F{productPercentage}]]></valueExpression>
+					</series>
+				</dataset>
+				<plot labelFormat="" showLabels="false">
+					<itemLabel>
+						<font fontName="Serif"/>
+					</itemLabel>
+					<seriesColor order="0" color="#13BBC3"/>
+					<seriesColor order="1" color="#227C9E"/>
+					<seriesColor order="2" color="#13B2A3"/>
+					<seriesColor order="3" color="#FE6D74"/>
+					<seriesColor order="4" color="#BEBEBE"/>
+					<seriesColor order="5" color="#EE0033"/>
+				</plot>
+				<property name="net.sf.jasperreports.customizer.class.1" value="com.vtp.vipo.seller.financialstatement.common.jasperreport.PiePlotEnclosingReport"/>
+				<property name="net.sf.jasperreports.customizer.class.0" value="com.vtp.vipo.seller.financialstatement.common.jasperreport.RectangleLegendCustomizer"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#B9B9B9"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+			</element>
+			<element kind="staticText" uuid="6b506999-3dd2-4bc2-8555-1e91af2e5d43" stretchType="NoStretch" x="0" y="298" width="130" height="22" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Top 5 sản phẩm bán chạy]]></text>
+			</element>
+			<element kind="component" uuid="1e58fd3c-06af-43b7-8883-1b5db52b169b" stretchType="ElementGroupHeight" x="0" y="320" width="551" height="60">
+				<component kind="table">
+					<datasetRun uuid="64e10dc9-e035-4c8b-8201-6d5cccd34811" subDataset="topProductDataset">
+						<dataSourceExpression><![CDATA[$P{topProductDataset}]]></dataSourceExpression>
+					</datasetRun>
+					<column kind="single" uuid="cb0e006f-1677-4b84-afc5-ca193091e697" width="40">
+						<columnHeader height="30" rowSpan="1" style="Table 11_CH">
+							<element kind="staticText" uuid="c2eb4016-3b97-413d-841c-50b0f4319f42" x="0" y="0" width="40" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[STT]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 11_TD">
+							<element kind="textField" uuid="81ea52b4-5858-47d3-814b-8b75ab650f09" x="0" y="0" width="40" height="30" fontName="DejaVu Sans Condensed" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{sequenceNum}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="8ef43ff8-3bee-4a2b-8dcd-fd368e68c30a" width="160">
+						<columnHeader height="30" rowSpan="1" style="Table 11_CH">
+							<element kind="staticText" uuid="0d1d2558-6082-4805-ba5a-fed92db80701" x="0" y="0" width="160" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Sản phẩm]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 11_TD">
+							<element kind="textField" uuid="678af6d5-a84b-4725-9f47-7fa3f6312aaa" x="0" y="0" width="160" height="30" fontName="DejaVu Sans Condensed" fontSize="8.0" textAdjust="StretchHeight" hTextAlign="Left" vTextAlign="Middle">
+								<expression><![CDATA[$F{productName}]]></expression>
+							</element>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="0409aa60-14df-4c8a-9450-9eba96ad09b9" width="49">
+						<columnHeader height="30" rowSpan="1" style="Table 11_CH">
+							<element kind="staticText" uuid="8699848d-8f10-4557-8072-3affb5d322c8" x="0" y="0" width="49" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Số lượng]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 11_TD">
+							<element kind="textField" uuid="2e6b1d5a-c38a-4716-b96e-71f80f552eb8" x="0" y="0" width="49" height="30" fontName="DejaVu Sans Condensed" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{quantity}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+					<column kind="single" uuid="c18653ec-8643-4c53-9716-513a4b5d8569" width="121">
+						<columnHeader height="30" rowSpan="1" style="Table 11_CH">
+							<element kind="staticText" uuid="9abd0be7-e204-40c4-9e61-209a9f01a1c5" x="0" y="0" width="121" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Thành tiền trước đàm phán]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 11_TD">
+							<element kind="textField" uuid="f9810030-4c9e-47df-bdd1-9faaae628c75" x="0" y="0" width="121" height="30" fontName="DejaVu Sans Condensed" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{originalPrice}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					</column>
+					<column kind="single" uuid="3d7c6b89-8fd3-4390-bd32-0f65af1b0dd0" width="120">
+						<columnHeader height="30" rowSpan="1" style="Table 11_CH">
+							<element kind="staticText" uuid="e6a1ed94-f3fa-4534-86c9-9df9ce70717b" x="0" y="0" width="120" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Thành tiền sau khi đàm phán]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 11_TD">
+							<element kind="textField" uuid="90cc4641-fff4-4d7f-9f15-774813bd922d" x="0" y="0" width="120" height="30" fontName="DejaVu Sans Condensed" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{finalPrice}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					</column>
+					<column kind="single" uuid="6dbf8d31-0659-4b8c-a5b0-53e3f3335576" width="61">
+						<columnHeader height="30" rowSpan="1" style="Table 11_CH">
+							<element kind="staticText" uuid="0c2ea864-7fda-4ff7-8b51-3e35f9200407" x="0" y="0" width="61" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="8.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[% Doanh thu]]></text>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 11_TD">
+							<element kind="textField" uuid="eec6e8ea-c91b-4c63-8a68-d09c90ee518c" x="0" y="0" width="61" height="30" fontName="DejaVu Sans Condensed" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{revenuePercentage}]]></expression>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table 11_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table 11_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table 11_TD"/>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<property name="com.jaspersoft.studio.layout"/>
+		</band>
+		<band height="73">
+			<printWhenExpression><![CDATA[!$P{hasProductData}]]></printWhenExpression>
+			<element kind="rectangle" uuid="7ce32950-3406-41da-a361-a39e26698ab8" stretchType="NoStretch" x="0" y="0" width="550" height="60" backcolor="rgba(255, 255, 255, 0.0)" radius="5">
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<pen lineWidth="0.5" lineStyle="Solid" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="40aba0be-f8c4-4fde-a94a-273a0cc6e5e5" stretchType="NoStretch" x="11" y="1" width="100" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Báo cáo sản phẩm]]></text>
+			</element>
+			<element kind="line" uuid="1dbb7a72-1cf2-4944-afba-7d05946592ba" stretchType="NoStretch" x="11" y="21" width="534" height="1">
+				<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="c68fdeb9-d101-410a-9c56-d9e8de15618f" stretchType="NoStretch" x="174" y="23" width="215" height="17" forecolor="#8F9294" fontName="DejaVu Serif Condensed" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Không có lịch sử trong thời gian này]]></text>
+			</element>
+		</band>
+		<band height="86" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{hasOrderData}]]></printWhenExpression>
+			<element kind="staticText" uuid="ca62c879-a748-4506-baa6-d7002eadb761" stretchType="NoStretch" x="0" y="0" width="90" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Báo cáo thu nhập]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="6939ccba-b32c-4177-aba1-b08bfad4726e" positionType="Float" stretchType="NoStretch" x="299" y="0" width="250" height="20" markup="html" fontName="DejaVu Sans Condensed" italic="true" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA["Tổng đơn: " + $P{orderPackageQuantity} + " đơn"]]></expression>
+			</element>
+			<element kind="component" uuid="c72cff7c-9ae1-419f-a3ae-2871cb6f2111" stretchType="NoStretch" x="0" y="20" width="548" height="60" printInFirstWholeBand="true">
+				<component kind="table">
+					<datasetRun uuid="ed3b0f60-7150-450b-91e5-d86355cdc6a7" subDataset="orderPackageRevenueDataset">
+						<dataSourceExpression><![CDATA[$P{orderPackageDataset}]]></dataSourceExpression>
+					</datasetRun>
+					<column kind="single" uuid="a676ea22-1030-4529-8b53-6e6f384531d5" width="82">
+						<columnHeader height="30" rowSpan="1" style="Table 15_CH">
+							<element kind="staticText" uuid="3f346054-f8c6-4bf5-aa7f-e7949c0adff5" x="0" y="0" width="82" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[STT]]></text>
+								<box>
+									<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 15_TD">
+							<element kind="textField" uuid="e3625ff1-7cbe-43a3-9602-df56377f4faf" x="0" y="0" width="82" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$V{REPORT_COUNT}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="ce61e00b-9a33-48fd-9d6b-41eaae127e2a" width="93">
+						<columnHeader height="30" rowSpan="1" style="Table 15_CH">
+							<element kind="staticText" uuid="2010b509-fa4e-4493-8890-bed0f87fa096" x="0" y="0" width="93" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Thời gian]]></text>
+								<box>
+									<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 15_TD">
+							<element kind="textField" uuid="bdaa60a6-b918-450d-8754-1e0e9f25ee97" x="0" y="0" width="93" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{time}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="3a567e36-3cff-4c11-9790-6ce1e5ff941e" width="122">
+						<columnHeader height="30" rowSpan="1" style="Table 15_CH">
+							<element kind="staticText" uuid="e556f790-78e5-45d1-bf60-ea61b6b51385" x="0" y="0" width="122" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Mã đơn hàng]]></text>
+								<box>
+									<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 15_TD">
+							<element kind="textField" uuid="8132c6ce-5381-4796-813f-a14a75e1d0d7" x="0" y="0" width="122" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{orderPackageCode}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+					<column kind="single" uuid="9d01fd45-055a-489c-985f-97ac8afca750" width="114">
+						<columnHeader height="30" rowSpan="1" style="Table 15_CH">
+							<element kind="staticText" uuid="c26890fc-8548-45c0-8239-942cb149b653" x="0" y="0" width="114" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Tổng tiền]]></text>
+								<box>
+									<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 15_TD">
+							<element kind="textField" uuid="4cf1871a-4182-4d3f-9125-339592604525" x="0" y="0" width="114" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{amount}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					</column>
+					<column kind="single" uuid="0cfef04d-c5f1-4452-bc24-046ad75666c3" width="137">
+						<columnHeader height="30" rowSpan="1" style="Table 15_CH">
+							<element kind="staticText" uuid="e648762d-bba6-4dc7-b096-2e60df295f56" x="0" y="0" width="137" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Trạng thái]]></text>
+								<box>
+									<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 15_TD">
+							<element kind="frame" uuid="d5068fa1-ac00-4a33-aa4e-5b4c3b5482ef" x="0" y="0" width="137" height="30">
+								<element kind="rectangle" uuid="ad10e202-c6d1-4d4c-aed9-fa44d63be6f9" positionType="Float" x="16" y="4" width="100" height="21" radius="12">
+									<property name="com.jaspersoft.studio.unit.width" value="px"/>
+									<property name="com.jaspersoft.studio.unit.height" value="px"/>
+									<propertyExpression name="net.sf.jasperreports.style.backcolor"><![CDATA[$F{status}.equals("Đơn có thể rút") ? "#E39717" : ($F{status}.equals("Đơn thành công") ? "#008C44" : "#2A8257")]]></propertyExpression>
+									<pen lineWidth="0.0"/>
+								</element>
+								<element kind="textField" uuid="707dc0b3-6795-4796-a620-d858032ce063" x="0" y="0" width="134" height="30" forecolor="#FFFFFF" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+									<expression><![CDATA[$F{status}]]></expression>
+									<box>
+										<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+										<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									</box>
+								</element>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table 15_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table 15_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table 15_TD"/>
+				<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+			</element>
+		</band>
+		<band height="76">
+			<printWhenExpression><![CDATA[!$P{hasOrderData}]]></printWhenExpression>
+			<element kind="rectangle" uuid="721f683a-c6f6-4a87-9322-dceaac44e4a3" stretchType="NoStretch" x="2" y="1" width="550" height="59" backcolor="rgba(255, 255, 255, 0.0)" radius="5">
+				<pen lineWidth="0.5" lineStyle="Solid" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="996f6061-a2dc-4806-bc24-8ce12e0e0b27" positionType="Float" stretchType="NoStretch" x="11" y="1" width="100" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Báo cáo thu nhập]]></text>
+			</element>
+			<element kind="staticText" uuid="e129d6d2-db3c-462b-97b4-5c121dba2de8" stretchType="NoStretch" x="457" y="1" width="88" height="21" fontName="DejaVu Serif Condensed" italic="true" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Tổng đơn: đơn]]></text>
+			</element>
+			<element kind="line" uuid="1107a52b-25f6-4c67-8d26-3a247896d018" stretchType="NoStretch" x="11" y="21" width="534" height="1">
+				<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="febe7917-23c5-46b4-a494-fbaf0a49858a" stretchType="NoStretch" x="174" y="23" width="215" height="17" forecolor="#8F9294" fontName="DejaVu Serif Condensed" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Không có lịch sử trong thời gian này]]></text>
+			</element>
+		</band>
+		<band height="82" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{hasWithdrawal}]]></printWhenExpression>
+			<element kind="staticText" uuid="3387cab7-e378-483b-99f0-9ea0e2e9f09a" stretchType="NoStretch" x="0" y="0" width="159" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Tổng kết thanh toán đã chuyển]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+			<element kind="textField" uuid="abb9c54b-d38e-47fd-bb8e-123eb366dc94" stretchType="NoStretch" x="301" y="0" width="250" height="20" markup="html" fontName="DejaVu Sans Condensed" italic="true" hTextAlign="Right" vTextAlign="Middle">
+				<expression><![CDATA["Số tiền: " + $P{totalCompletePaymentAmount} + " VNĐ"]]></expression>
+			</element>
+			<element kind="component" uuid="8ba0f444-d5ba-4905-837f-0bb709bf5c30" stretchType="NoStretch" x="0" y="20" width="550" height="60">
+				<component kind="table">
+					<datasetRun uuid="86e00864-b9ad-4bdb-bfb9-3d404254b031" subDataset="transferedPaymentSumaryDataset">
+						<dataSourceExpression><![CDATA[$P{transferedPaymentSumaryDataset}]]></dataSourceExpression>
+					</datasetRun>
+					<column kind="single" uuid="23646371-c6da-4735-b5db-7316e3cc3d84" width="113">
+						<columnHeader height="30" rowSpan="1" style="Table 14_CH">
+							<element kind="staticText" uuid="a55146fd-c243-4d0b-8fd8-237e72e739dc" x="0" y="0" width="113" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[STT]]></text>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 14_TD">
+							<element kind="textField" uuid="519e08d2-0918-404d-9ed5-b05f0b60d409" x="0" y="0" width="113" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$V{REPORT_COUNT}]]></expression>
+								<box>
+									<pen lineWidth="0.0"/>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+					</column>
+					<column kind="single" uuid="7249ddd9-ea12-4917-8e15-d439a3e20213" width="133">
+						<columnHeader height="30" rowSpan="1" style="Table 14_CH">
+							<element kind="staticText" uuid="22f796fb-ef58-45b8-a643-b0c5425f619f" x="0" y="0" width="133" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Thời gian]]></text>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 14_TD">
+							<element kind="textField" uuid="340a4cf1-9d2e-401e-af1c-e3fede17de66" x="0" y="0" width="133" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{time}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+					</column>
+					<column kind="single" uuid="6dbe7ba1-f431-4643-8826-22c83e1b80fc" width="152">
+						<columnHeader height="30" rowSpan="1" style="Table 14_CH">
+							<element kind="staticText" uuid="75d19139-cc61-4362-9c7e-a1aa1b2aed55" x="0" y="0" width="152" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Mã đơn hàng]]></text>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 14_TD">
+							<element kind="textField" uuid="51732f32-c5cf-4636-8ce0-4a24b6752727" x="0" y="0" width="152" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{orderPackageCode}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+					</column>
+					<column kind="single" uuid="c4bd0715-1bf1-4fe6-81b2-6a3e36ee6c8f" width="152">
+						<columnHeader height="30" rowSpan="1" style="Table 14_CH">
+							<element kind="staticText" uuid="912dad74-ea83-4951-9b74-c2fef65f3c59" x="0" y="0" width="152" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<text><![CDATA[Tổng tiền]]></text>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</columnHeader>
+						<detailCell height="30" style="Table 14_TD">
+							<element kind="textField" uuid="17d75abb-05bf-4f8b-a50c-3dd296ef49a0" x="0" y="0" width="152" height="30" fontName="DejaVu Sans Condensed" fontSize="10.0" hTextAlign="Center" vTextAlign="Middle">
+								<expression><![CDATA[$F{amount}]]></expression>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+							</element>
+						</detailCell>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+					</column>
+				</component>
+				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<property name="com.jaspersoft.studio.table.style.table_header" value="Table 14_TH"/>
+				<property name="com.jaspersoft.studio.table.style.column_header" value="Table 14_CH"/>
+				<property name="com.jaspersoft.studio.table.style.detail" value="Table 14_TD"/>
+				<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			</element>
+		</band>
+		<band height="63">
+			<printWhenExpression><![CDATA[!$P{hasWithdrawal}]]></printWhenExpression>
+			<element kind="rectangle" uuid="9760c50d-975a-4c06-b01f-645018539aaa" stretchType="NoStretch" x="0" y="0" width="550" height="59" backcolor="rgba(255, 255, 255, 0.0)" radius="5">
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<pen lineWidth="0.5" lineStyle="Solid" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="3758a3df-b7d3-4fad-a5be-369b543b560d" stretchType="NoStretch" x="3" y="1" width="163" height="20" fontName="DejaVu Sans Condensed" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Tổng kết thanh toán đã chuyển]]></text>
+			</element>
+			<element kind="staticText" uuid="4b5b2c22-05e9-4eca-b71d-4b732d1d65dd" stretchType="NoStretch" x="457" y="1" width="88" height="21" fontName="DejaVu Serif Condensed" italic="true" hTextAlign="Right" vTextAlign="Middle">
+				<text><![CDATA[Số tiền: VNĐ]]></text>
+			</element>
+			<element kind="line" uuid="aed74ae8-17e4-47fa-9fc5-158c09a62b88" stretchType="NoStretch" x="11" y="21" width="534" height="1">
+				<pen lineWidth="0.5" lineColor="#B9B9B9"/>
+			</element>
+			<element kind="staticText" uuid="2c22fdd9-9e83-4e80-b8be-f2c5e38780aa" stretchType="NoStretch" x="174" y="23" width="215" height="17" forecolor="#8F9294" fontName="DejaVu Serif Condensed" hTextAlign="Center" vTextAlign="Middle">
+				<text><![CDATA[Không có lịch sử trong thời gian này]]></text>
+			</element>
+		</band>
+	</detail>
+</jasperReport>

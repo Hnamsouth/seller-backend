@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: update-totalPrice-in-package_product
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - and:
+            - tableExists:
+                tableName: package_product
+            - columnExists:
+                tableName: package_product
+                columnName: price
+            - columnExists:
+                tableName: package_product
+                columnName: quantity
+            - columnExists:
+                tableName: package_product
+                columnName: totalPrice
+      changes:
+        - sql:
+            sql: |
+              UPDATE package_product
+              SET totalPrice = price * quantity
+              WHERE totalPrice IS NULL OR totalPrice = 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_2
+      rollback:
+        - sql:
+            sql: |
+              UPDATE package_product
+              SET totalPrice = NULL
+              WHERE totalPrice = price * quantity

@@ -1,0 +1,140 @@
+#variables:
+#  namespace: "dev-vipo"
+#  deployment: "seller-backend"
+#  image: "${CI_REGISTRY}/vipo/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}_${CI_COMMIT_SHORT_SHA}"
+#stages:
+#  - createfolder
+#  - buildandpush
+##  - deployk8s
+##  - sonar
+#
+#createfolder:
+#  stage: createfolder
+#  allow_failure: true
+#  variables:
+#    GIT_STRATEGY: none
+#  tags:
+#    - dev-voso2-shell
+#  script:
+#    - cd /home/gitlab-runner/vipo
+#    - echo ${CI_PROJECT_NAME}
+#    - rm -rf ${CI_PROJECT_NAME}.bk | FAILED=true
+#    - mv -f ${CI_PROJECT_NAME} ${CI_PROJECT_NAME}.bk | FAILED=true
+#    - mkdir ${CI_PROJECT_NAME} | FAILED=true
+#  only:
+#    - /^dev_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#    - /^stag_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#    - /^prod_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#
+#
+#buildandpush:
+#  stage: buildandpush
+#  before_script:
+#    - docker login -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD} $CI_REGISTRY
+#  allow_failure: false
+#  variables:
+#    GIT_STRATEGY: clone
+#  tags:
+#    - dev-voso2-shell
+#  script:
+#    - echo ${CI_PROJECT_NAME}
+#    - cp -Rf * /home/gitlab-runner/vipo/${CI_PROJECT_NAME}
+#    - cd /home/gitlab-runner/vipo/${CI_PROJECT_NAME}
+#    - docker build --network host -t "$image" .
+#    - docker push "$image"
+#  only:
+#    - /^dev_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#    - /^stag_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#    - /^prod_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#
+##sonar:
+##  stage: sonar
+##  variables:
+##    GIT_STRATEGY: none
+##  tags:
+##    - dev-voso2-shell
+##  when: manual
+##  script:
+##    - pwd
+##    - DOCKER_BUILDKIT=1 docker run -u 996:994 --rm --network host -v `pwd`:/app --workdir="/app"  sonarsource/sonar-scanner-cli:5.0.1 sonar-scanner -X $SONAR_SCANNER_OPTS -Dsonar.host.url="$SONAR_HOST_URL" -Dsonar.login="$SONAR_TOKEN" -Dsonar.java.binaries="." -Dsonar.sources="./src/" -Dsonar.projectKey="${CI_PROJECT_NAME}" -Dsonar.projectName="$CI_PROJECT_NAME" -Dsonar.projectVersion="${CI_COMMIT_TAG}_${CI_COMMIT_SHORT_SHA}";
+##  only:
+##    - /^dev_\d{2}\.\d{2}\.\d{4}_v\d+$/
+##    - /^stag_\d{2}\.\d{2}\.\d{4}_v\d+$/
+##    - /^prod_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#
+##deployk8s:
+##  stage: deployk8s
+##  variables:
+##    GIT_STRATEGY: none
+##  allow_failure: true
+##  tags:
+##    - dev-k8s-node1
+##  script:
+##    - kubectl set image deployment/"$deployment" "$deployment"="$image" -n "$namespace"
+##  only:
+##    - /^dev_\d{2}\.\d{2}\.\d{4}_v\d+$/
+#
+
+
+stages:
+  - build
+  - restart
+  - checklogs
+  - sonar
+
+build:
+  stage: build
+  variables:
+    GIT_STRATEGY: clone
+  allow_failure: false
+  tags:
+    - dev-voso2-shell
+  script:
+    - java -version
+    - mvn -v
+    - mvn clean install
+  only:
+    - tags
+restart:
+  stage: restart
+  variables:
+    GIT_STRATEGY: none
+  allow_failure: false
+  tags:
+    - dev-voso2-shell
+  script:
+    - sudo su vipo-seller-be -c "rm -rf /data/vipo-seller-be/run/*.jar"
+    - sudo cp target/seller-service-0.0.1-SNAPSHOT.jar /data/vipo-seller-be/run
+    - sleep 3s
+    - ps -ef | grep seller-service-0.0.1-SNAPSHOT.jar | grep -v grep | awk '{print $2}' | xargs sudo kill -9 || FAILED=true
+    - sleep 3s
+    - sudo chown -R vipo-seller-be. /data/vipo-seller-be
+    - sudo su vipo-seller-be sh -c "cd /data/vipo-seller-be/run;/bin/sh run.sh"
+    - sleep 5s
+    - ps -ef | grep seller-service-0.0.1-SNAPSHOT.jar | grep -v grep | wc -l
+  only:
+    - tags
+checklogs:
+  stage: checklogs
+  variables:
+    GIT_STRATEGY: none
+  allow_failure: false
+  tags:
+    - dev-voso2-shell
+  script:
+    - sudo su vipo-seller-be sh -c "tail -n 1000 /data/vipo-seller-be/run/nohup.out"
+  only:
+    - tags
+
+sonar:
+  stage: sonar
+  variables:
+    GIT_STRATEGY: none
+  allow_failure: true
+  tags:
+    - dev-voso2-shell
+  script:
+    - pwd
+    - DOCKER_BUILDKIT=1 docker run -u 998:997 --rm --network host -v `pwd`:/app --workdir="/app"  sonarsource/sonar-scanner-cli:5.0.1 sonar-scanner -X $SONAR_SCANNER_OPTS -Dsonar.host.url="$STAG_SONAR_HOST_URL" -Dsonar.login="$STAG_SONAR_TOKEN" -Dsonar.java.binaries="./target/classes" -Dsonar.sources="./src" -Dsonar.projectKey="${CI_PROJECT_NAME}" -Dsonar.projectName="$CI_PROJECT_NAME" -Dsonar.projectVersion="${CI_COMMIT_TAG}_${CI_COMMIT_SHORT_SHA}";
+  only:
+    - tags

@@ -1,0 +1,626 @@
+databaseChangeLog:
+  # ChangeSet for the 'withdrawal_config' table
+  - changeSet:
+      id: phase6_create_withdrawal_config_table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: withdrawal_config
+      changes:
+        - tagDatabase:
+            tag: phase6_1.0.0
+        - createTable:
+            tableName: withdrawal_config
+            
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_withdrawal_config
+              - column:
+                  name: merchantGroupId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  remarks: "Foreign key referencing merchant_group(id)"
+              - column:
+                  name: withdrawAfterDays
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: maxWithdrawalAttemptInAMonth
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_config
+            baseColumnNames: merchantGroupId
+            constraintName: fk_withdrawal_config_merchant_group
+            referencedTableName: merchant_group
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_config_merchant_group
+            baseTableName: withdrawal_config
+        - dropTable:
+            tableName: withdrawal_config
+
+  # ChangeSet for the 'withdrawal_config_history' table
+  - changeSet:
+      id: phase6_create_withdrawal_config_history_table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+            tableExists:
+              tableName: withdrawal_config_history
+      changes:
+        - tagDatabase:
+            tag: phase6_1.0.0
+        - createTable:
+            tableName: withdrawal_config_history
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_withdrawal_config_history
+              - column:
+                  name: withdrawalConfigId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  remarks: "Foreign key referencing withdrawal_config(id)"
+              - column:
+                  name: before
+                  type: JSON
+                  constraints:
+                    nullable: true
+              - column:
+                  name: after
+                  type: JSON
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_config_history
+            baseColumnNames: withdrawalConfigId
+            constraintName: fk_withdrawal_conf_hist_withdrawal_config
+            referencedTableName: withdrawal_config
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_conf_hist_withdrawal_config
+            baseTableName: withdrawal_config_history
+        - dropTable:
+            tableName: withdrawal_config_history
+
+  # ChangeSet for the 'withdrawal_request' table
+  - changeSet:
+      id: phase6_create_withdrawal_request_table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+            tableExists:
+              tableName: withdrawal_request
+      changes:
+        - tagDatabase:
+            tag: phase6_1.0.0
+        - createTable:
+            tableName: withdrawal_request
+
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_withdrawal_request
+              - column:
+                  name: merchantId
+                  type: int
+                  constraints:
+                    nullable: false
+                  remarks: "Foreign key referencing merchant(id), storing epoch seconds"
+              - column:
+                  name: status
+                  type: "ENUM('PENDING','PROCESSING','APPROVED','REJECTED','SUCCESS','CANCELLED')"
+                  defaultValue: 'PENDING'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: totalAmount
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tax
+                  type: DECIMAL(15,2)
+                  defaultValueNumeric: 0.00
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_request
+            baseColumnNames: merchantId
+            constraintName: fk_withdrawal_request_seller
+            referencedTableName: merchant
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_request_seller
+            baseTableName: withdrawal_request
+        - dropTable:
+            tableName: withdrawal_request
+
+  # ChangeSet for the 'withdrawal_request_item' table
+  - changeSet:
+      id: phase6_create_withdrawal_request_item_table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: withdrawal_request_item
+      changes:
+        - tagDatabase:
+            tag: phase6_1.0.0
+        - createTable:
+            tableName: withdrawal_request_item
+
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_withdrawal_request_item
+              - column:
+                  name: withdrawalRequestId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  remarks: "Foreign key referencing withdrawal_request(id), storing epoch seconds"
+              - column:
+                  name: packageId
+                  type: INT
+                  constraints:
+                    nullable: false
+                  remarks: "Foreign key referencing order_package(id)"
+              - column:
+                  name: withdrawAmount
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_request_item
+            baseColumnNames: withdrawalRequestId
+            constraintName: fk_withdrawal_req_item_withdrawal_req
+            referencedTableName: withdrawal_request
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_request_item
+            baseColumnNames: packageId
+            constraintName: fk_withdrawal_req_item_order
+            referencedTableName: order_package
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_req_item_order
+            baseTableName: withdrawal_request_item
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_req_item_withdrawal_req
+            baseTableName: withdrawal_request_item
+        - dropTable:
+            tableName: withdrawal_request_item
+
+  # ChangeSet for the 'withdrawal_request_log' table
+  - changeSet:
+      id: phase6_create_withdrawal_request_log_table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+            tableExists:
+              tableName: withdrawal_request_log
+      changes:
+        - tagDatabase:
+            tag: phase6_1.0.0
+        - createTable:
+            tableName: withdrawal_request_log
+
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_withdrawal_request_log
+              - column:
+                  name: withdrawalRequestId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  remarks: "Foreign key referencing withdrawal_request(id), storing epoch seconds"
+              - column:
+                  name: previousStatus
+                  type: "ENUM('PENDING','PROCESSING','APPROVED','REJECTED','SUCCESS','CANCELLED')"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: newStatus
+                  type: "ENUM('PENDING','PROCESSING','APPROVED','REJECTED','SUCCESS','CANCELLED')"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: before
+                  type: JSON
+                  constraints:
+                    nullable: true
+              - column:
+                  name: after
+                  type: JSON
+                  constraints:
+                    nullable: true
+              - column:
+                  name: remarks
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_request_log
+            baseColumnNames: withdrawalRequestId
+            constraintName: fk_withdrawal_req_log_withdrawal_req
+            referencedTableName: withdrawal_request
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_req_log_withdrawal_req
+            baseTableName: withdrawal_request_log
+        - dropTable:
+            tableName: withdrawal_request_log
+
+  # ChangeSet for the 'withdrawal_request_export' table
+  - changeSet:
+      id: phase6_create_withdrawal_request_export_table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+            tableExists:
+              tableName: withdrawal_request_export
+      changes:
+        - tagDatabase:
+            tag: phase6_1.0.0
+        - createTable:
+            tableName: withdrawal_request_export
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_withdrawal_request_export
+              - column:
+                  name: withDrawalRequestId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                  remarks: "Foreign key referencing withdrawal_request(id)"
+              - column:
+                  name: reportType
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reportName
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: filePath
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: exportTime
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: "ENUM('COMPLETED','PENDING','FAILED')"
+                  defaultValue: "PENDING"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: errorMessage
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  remarks: "the field is storing epoch seconds"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: withdrawal_request_export
+            baseColumnNames: withDrawalRequestId
+            constraintName: fk_withdrawal_req_export_withdrawal_req
+            referencedTableName: withdrawal_request
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+
+      rollback:
+        - dropForeignKeyConstraint:
+            constraintName: fk_withdrawal_req_export_withdrawal_req
+            baseTableName: withdrawal_request_export
+        - dropTable:
+            tableName: withdrawal_request_export

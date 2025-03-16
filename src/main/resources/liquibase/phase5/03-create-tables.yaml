@@ -1,0 +1,913 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-seller_order_status-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: seller_order_status
+      changes:
+        - tagDatabase:
+            tag: p5_1.0.0_3
+        - createTable:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: parent_id
+                  type: INT
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            constraintName: fk_seller_order_status_parent
+            baseTableName: seller_order_status
+            baseColumnNames: parent_id
+            referencedTableName: seller_order_status
+            referencedColumnNames: id
+            onUpdate: CASCADE
+            onDelete: SET NULL
+
+  - changeSet:
+      id: create-carrier
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: carrier
+      changes:
+        - createTable:
+            tableName: carrier
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: carrierCode
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contactInfo
+                  type: VARCHAR(255)
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: createdBy
+                  type: VARCHAR(50)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(50)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: isDeleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+
+        - tagDatabase:
+            tag: p5_1.0.0_3
+
+  - changeSet:
+      id: create-order_shipment
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: order_shipment
+      changes:
+        - createTable:
+            tableName: order_shipment
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: packageId
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: carrierId
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: shipmentCode
+                  type: VARCHAR(50)
+              - column:
+                  name: shipmentDate
+                  type: TIMESTAMP
+              - column:
+                  name: pickupAddress
+                  type: VARCHAR(500)
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: createdBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createOrderStatus
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: true
+                  remarks: "Status when creating the order"
+              - column:
+                  name: status
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: true
+                  remarks: "Current status of the shipment"
+              - column:
+                  name: createOrderMessage
+                  type: VARCHAR(200)
+                  constraints:
+                    nullable: true
+                  remarks: "Message when creating the order"
+              - column:
+                  name: isPrinted
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+                  remarks: "Flag to indicate if the shipment is printed"
+              - column:
+                  name: warehouseAddressId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                  remarks: "Foreign key referencing warehouse_address(id)"
+              - column:
+                  name: shipmentFee
+                  type: DECIMAL(20,2)
+                  defaultValueNumeric: 0.00
+                  constraints:
+                    nullable: true
+                  remarks: "Fee for shipment"
+              - column:
+                  name: note
+                  type: MEDIUMTEXT
+                  constraints:
+                    nullable: true
+                  remarks: "Additional notes"
+              - column:
+                  name: expectedDeliveryTime
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+                  remarks: "Expected delivery time"
+
+        - addForeignKeyConstraint:
+            constraintName: fk_order_shipment_order_package
+            baseTableName: order_shipment
+            baseColumnNames: packageId
+            referencedTableName: order_package
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+        - addForeignKeyConstraint:
+            constraintName: fk_order_shipment_carrier
+            baseTableName: order_shipment
+            baseColumnNames: carrierId
+            referencedTableName: carrier
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+        - addForeignKeyConstraint:
+            constraintName: fk_order_shipment_warehouse_address
+            baseTableName: order_shipment
+            baseColumnNames: warehouseAddressId
+            referencedTableName: warehouse_address
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+        - tagDatabase:
+            tag: p5_1.0.0_3
+
+  - changeSet:
+      id: create-report_export-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: report_export
+      changes:
+        - createTable:
+            tableName: report_export
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: merchantId
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reportType
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reportFileName
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: exportReportRequest
+                  type: TEXT
+              - column:
+                  name: filePath
+                  type: VARCHAR(500)
+              - column:
+                  name: finishTime
+                  type: TIMESTAMP
+              - column:
+                  name: status
+                  type: ENUM('pending', 'completed', 'failed')
+                  defaultValue: 'pending'
+              - column:
+                  name: errorMessage
+                  type: VARCHAR(1000)
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: "Creation timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: "Last update timestamp"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: storageType
+                  type: VARCHAR(50)
+                  remarks: "storage type"
+                  defaultValue: "s3"
+                  constraints:
+                    nullable: true
+              - column:
+                  name: storageInfo
+                  type: JSON
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reportSubType
+                  type: VARCHAR(255)
+                  remarks: "Loại xuất báo cáo theo Tab đơn hàng"
+                  constraints:
+                    nullable: true
+
+        - createIndex:
+            indexName: idx_user_id_export_time
+            tableName: report_export
+            columns:
+              - column:
+                  name: merchantId
+              - column:
+                  name: createdAt
+                  descending: true
+        - tagDatabase:
+            tag: p5_1.0.0_3
+
+  - changeSet:
+      id: create-order_extra_services
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: order_extra_services
+      changes:
+        - createTable:
+            tableName: order_extra_services
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: serviceType
+                  type: ENUM('domestic', 'international')
+                  constraints:
+                    nullable: false
+              - column:
+                  name: serviceName
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: createdBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+        - tagDatabase:
+            tag: p5_1.0.0_3
+
+  - changeSet:
+      id: create-order_extra_service_fee
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: order_extra_service_fee
+      changes:
+        - createTable:
+            tableName: order_extra_service_fee
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: orderId
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: serviceId
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: componentFee
+                  type: DECIMAL(15,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: createdBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+        - tagDatabase:
+            tag: p5_1.0.0_3
+
+  - changeSet:
+      id: create-order-activity-history-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: order_activity_history
+      changes:
+        - tagDatabase:
+            tag: p5_1.0.0_3
+        - createTable:
+            tableName: order_activity_history
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: orderId
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: type
+                  type: varchar(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: details
+                  type: json
+                  constraints:
+                    nullable: true
+              - column:
+                  name: beforeState
+                  type: json
+                  constraints:
+                    nullable: true
+              - column:
+                  name: afterState
+                  type: json
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdAt
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedAt
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+              - column:
+                  name: metadata
+                  type: JSON
+                  constraints:
+                    nullable: true
+
+        - sql:
+            dbms: mysql
+            splitStatements: false
+            stripComments: true
+            sql: |
+              ALTER TABLE order_activity_history
+              MODIFY updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+  - changeSet:
+      id: create-merchant-group-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: merchant_group
+      changes:
+        - createTable:
+            tableName: merchant_group
+            remarks: "Table to store merchant groups"
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: "Primary key"
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                  remarks: "Name of the merchant group"
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+                  remarks: "Timestamp when the record was created"
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+                  remarks: "Timestamp when the record was last updated"
+        - insert:
+            tableName: merchant_group
+            columns:
+              - column:
+                  name: name
+                  value: "Merchant group default"
+              - column:
+                  name: createdAt
+                  valueDate: "2024-12-25T11:51:53"
+              - column:
+                  name: updatedAt
+                  valueDate: "2024-12-25T11:51:53"
+
+        - tagDatabase:
+            tag: p5_160125
+
+      rollback:
+        - dropTable:
+            tableName: merchant_group
+
+  - changeSet:
+      id: create-platform-fee-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: platform_fee
+      changes:
+        - createTable:
+            tableName: platform_fee
+            remarks: "Table to store platform fee details"
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: "Primary key"
+              - column:
+                  name: merchantGroupId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                  remarks: "Foreign key referencing merchant_group(id)"
+              - column:
+                  name: type
+                  type: ENUM('TOTAL', 'PERCENTAGE')
+                  constraints:
+                    nullable: true
+                  remarks: "Type of fee"
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+                  remarks: "Name of the fee"
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+                  remarks: "Description of the fee"
+              - column:
+                  name: value
+                  type: DECIMAL(20,2)
+                  constraints:
+                    nullable: false
+                  remarks: "Giá trị chi phí"
+              - column:
+                  name: minPrice
+                  type: DECIMAL(20,2)
+                  constraints:
+                    nullable: false
+                  remarks: "Nếu Giá chi phí áp dụng theo đơn nhỏ hơn thì áp dụng chi phí này"
+              - column:
+                  name: status
+                  type: ENUM('ACTIVE', 'INACTIVE')
+                  defaultValue: 'ACTIVE'
+                  constraints:
+                    nullable: true
+                  remarks: "Status of the fee"
+              - column:
+                  name: createdAt
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                  remarks: "Timestamp when the record was created"
+              - column:
+                  name: updatedAt
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                  remarks: "Timestamp when the record was last updated"
+        - addForeignKeyConstraint:
+            baseTableName: platform_fee
+            baseColumnNames: merchantGroupId
+            constraintName: fk_platform_fee_merchant_group_id
+            referencedTableName: merchant_group
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: CASCADE
+        - insert:
+            tableName: platform_fee
+            columns:
+              - column:
+                  name: merchantGroupId
+                  valueNumeric: 1
+              - column:
+                  name: type
+                  value: "TOTAL"
+              - column:
+                  name: name
+                  value: "Phí sàn"
+              - column:
+                  name: description
+                  value: "Phí cố định"
+              - column:
+                  name: value
+                  valueNumeric: 5000.00
+              - column:
+                  name: minPrice
+                  valueNumeric: 0.00
+              - column:
+                  name: status
+                  value: "INACTIVE"
+        - insert:
+            tableName: platform_fee
+            columns:
+              - column:
+                  name: merchantGroupId
+                  valueNumeric: 1
+              - column:
+                  name: type
+                  value: "PERCENTAGE"
+              - column:
+                  name: name
+                  value: "Phí chiết khấu"
+              - column:
+                  name: description
+                  value: "Tính theo % tổng bill"
+              - column:
+                  name: value
+                  valueNumeric: 10.00
+              - column:
+                  name: minPrice
+                  valueNumeric: 4000.00
+              - column:
+                  name: status
+                  value: "ACTIVE"
+        - tagDatabase:
+            tag: p5_1.0.0_3
+
+      rollback:
+        - dropTable:
+            tableName: platform_fee
+
+  - changeSet:
+      id: create-platform_fee_detail
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: platform_fee_detail
+      changes:
+        - createTable:
+            tableName: platform_fee_detail
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: packageId
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: feeType
+                  type: ENUM('PLATFORM_DISCOUNT_FEE', 'OTHER_FEE')
+                  constraints:
+                    nullable: false
+              - column:
+                  name: feeDescription
+                  type: TEXT
+              - column:
+                  name: feeValue
+                  type: DECIMAL(10,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: additionalData
+                  type: JSON
+              - column:
+                  name: createdAt
+                  type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updatedAt
+                  type: DATETIME
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: createdBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: updatedBy
+                  type: varchar(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: isDeleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 1
+                  constraints:
+                    nullable: false
+              - column:
+                  name: feeName
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: platformFeeId
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: ENUM('TOTAL', 'PERCENTAGE')
+                  constraints:
+                    nullable: true
+              - column:
+                  name: typeValue
+                  type: decimal(20, 2)
+                  constraints:
+                    nullable: true
+        - addForeignKeyConstraint:
+            constraintName: fk_platform_fee_detail_order_package
+            baseTableName: platform_fee_detail
+            baseColumnNames: packageId
+            referencedTableName: order_package
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: CASCADE
+        - tagDatabase:
+            tag: p5_1.0.0_3

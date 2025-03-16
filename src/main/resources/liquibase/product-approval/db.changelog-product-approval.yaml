@@ -1,0 +1,353 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-product-temporary-table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: product_temporary
+      changes:
+        - tagDatabase:
+            tag: product-approval_1.0.0
+        - createTable:
+            tableName: product_temporary
+            remarks: 'Bảng sản phẩm tạm seller'
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: productId
+                  type: BIGINT
+                  remarks: 'productId bảng product'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: productCodeCustomer
+                  type: VARCHAR(250)
+                  remarks: 'Ma san pham khach hang'
+              - column:
+                  name: categoryId
+                  type: INT
+                  remarks: 'Mã danh mục chính'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(250)
+                  remarks: 'Tên sản phẩm'
+              - column:
+                  name: originalProductName
+                  type: VARCHAR(255)
+                  remarks: 'Tên sản phẩm đầy đủ'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image
+                  type: MEDIUMTEXT
+                  remarks: 'ảnh đại diện'
+              - column:
+                  name: price
+                  type: DECIMAL(20,2)
+              - column:
+                  name: displayPrice
+                  type: DECIMAL(20,2)
+              - column:
+                  name: images
+                  type: MEDIUMTEXT
+                  remarks: 'Nhiều hình ảnh'
+              - column:
+                  name: description
+                  type: MEDIUMTEXT
+                  remarks: 'Chi tiết sản phẩm'
+              - column:
+                  name: trailerVideo
+                  type: MEDIUMTEXT
+                  remarks: 'Trailer Video'
+              - column:
+                  name: quoteType
+                  type: INT
+                  defaultValueNumeric: 0
+                  remarks: 'quote_type'
+              - column:
+                  name: priceRanges
+                  type: LONGTEXT
+                  remarks: 'Thang giá SKU'
+              - column:
+                  name: productPriceType
+                  type: INT
+                  defaultValueNumeric: 0
+                  remarks: 'Loại giá'
+              - column:
+                  name: minOrderQuantity
+                  type: INT
+                  defaultValueNumeric: 1
+                  remarks: 'Số lượng tối thiểu'
+              - column:
+                  name: productSpecInfo
+                  type: LONGTEXT
+                  remarks: 'Thông số sản phẩm'
+              - column:
+                  name: platformDiscountRate
+                  type: DECIMAL(5,2)
+                  defaultValueNumeric: 0.00
+                  remarks: '% chiết khấu cho sàn'
+              - column:
+                  name: createdDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày tạo'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày cập nhật'
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropIndex:
+            indexName: idx_product_temporary_productId
+            tableName: product_temporary
+        - dropTable:
+            tableName: product_temporary
+
+  - changeSet:
+      id: create-product-seller-sku-temporary-table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: product_seller_sku_temporary
+      changes:
+        - tagDatabase:
+            tag: product-approval_1.0.0
+        - createTable:
+            tableName: product_seller_sku_temporary
+            remarks: 'Thông tin SKU sản phẩm tạm seller'
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: productTemporaryId
+                  type: BIGINT
+                  remarks: 'id bảng product_temporary'
+              - column:
+                  name: sellerClassifyTemporaryId
+                  type: VARCHAR(100)
+                  remarks: 'id bảng seller_temporary_classify cách nhau bởi dấu ,'
+              - column:
+                  name: productImage
+                  type: VARCHAR(255)
+                  remarks: 'Ảnh sản phẩm'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: unitPrice
+                  type: DECIMAL(15,2)
+                  remarks: 'Đơn giá'
+              - column:
+                  name: stock
+                  type: BIGINT
+                  remarks: 'Tồn kho'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: codeCustomer
+                  type: VARCHAR(100)
+                  remarks: 'Mã sp sku bên khách hàng'
+              - column:
+                  name: code
+                  type: VARCHAR(100)
+                  remarks: 'code hass md5 tu cac phan loai cach nhau boi dau - vd Size:xl-Corlor:Red-Origin:China'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: minPurchase
+                  type: INT
+                  remarks: 'Mua tối thiểu'
+              - column:
+                  name: weight
+                  type: INT
+                  remarks: 'Cân nặng (gram)'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: length
+                  type: DECIMAL(10,3)
+                  remarks: 'Chiều dài (cm)'
+              - column:
+                  name: width
+                  type: DECIMAL(10,3)
+                  remarks: 'Chiều rộng (cm)'
+              - column:
+                  name: height
+                  type: DECIMAL(10,3)
+                  remarks: 'Chiều cao (cm)'
+              - column:
+                  name: shippingFee
+                  type: DECIMAL(18,2)
+                  remarks: 'Phí vận chuyển'
+              - column:
+                  name: activeStatus
+                  type: TINYINT(1)
+                  defaultValueNumeric: 1
+                  remarks: 'Trạng thái hoạt động'
+              - column:
+                  name: createdDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày tạo'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày cập nhật'
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropIndex:
+            indexName: idx_product_seller_sku_temporary_productTemporaryId
+            tableName: product_seller_sku_temporary
+        - dropTable:
+            tableName: product_seller_sku_temporary
+
+  - changeSet:
+      id: create-seller-attribute-temporary-table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: seller_attribute_temporary
+      changes:
+        - tagDatabase:
+            tag: product-approval_1.0.0
+        - createTable:
+            tableName: seller_attribute_temporary
+            remarks: 'Bảng thuộc tính tạm sản phẩm seller'
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: productTemporaryId
+                  type: BIGINT
+                  remarks: 'id bảng product_temporary'
+              - column:
+                  name: attributeName
+                  type: VARCHAR(150)
+                  remarks: 'Tên phân loại'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: attributeOrder
+                  type: TINYINT
+                  remarks: 'thu tu thuoc tinh bat dau tu 1 va tang dan 1 don vi'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày tạo'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày cập nhật'
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropIndex:
+            indexName: idx_seller_attribute_temporary_productTemporaryId
+            tableName: seller_attribute_temporary
+        - dropTable:
+            tableName: seller_attribute_temporary
+
+  - changeSet:
+      id: create-seller-classify-temporary-table
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: seller_classify_temporary
+      changes:
+        - tagDatabase:
+            tag: product-approval_1.0.0
+        - createTable:
+            tableName: seller_classify_temporary
+            remarks: 'Bảng phân loại tạm sản phẩm seller'
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: productTemporaryId
+                  type: BIGINT
+                  remarks: 'id bảng product_temporary'
+              - column:
+                  name: sellerAttributeTemporaryId
+                  type: BIGINT
+                  remarks: 'id bảng seller_temporary_attribute'
+              - column:
+                  name: sellerImage
+                  type: VARCHAR(255)
+                  remarks: 'Ảnh phân loại'
+              - column:
+                  name: sellerName
+                  type: VARCHAR(150)
+                  remarks: 'Tên phân loại'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: orderClassify
+                  type: TINYINT
+                  remarks: 'stt phân loại'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày tạo'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updatedDate
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: 'Ngày cập nhật'
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropIndex:
+            indexName: idx_seller_classify_temporary_productTemporaryId
+            tableName: seller_classify_temporary
+        - dropTable:
+            tableName: seller_classify_temporary

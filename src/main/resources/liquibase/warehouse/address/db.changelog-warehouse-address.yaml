@@ -1,0 +1,154 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-warehouse_address
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            tableName: warehouse_address
+      changes:
+        - createTable:
+            tableName: warehouse_address
+            remarks: "Table to store warehouse addresses"
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  remarks: "ID bản ghi"
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: merchantId
+                  type: INT
+                  remarks: "Foreign key referencing merchant table"
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: fullAddress
+                  type: TEXT
+                  remarks: "Full address"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: name
+                  type: VARCHAR(500)
+                  remarks: "Họ và tên"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: phoneNumber
+                  type: VARCHAR(20)
+                  remarks: "Số điện thoại"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: wardId
+                  type: INT
+                  remarks: "Phường/Xã"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: street
+                  type: VARCHAR(500)
+                  remarks: "Đường/Thôn/Xóm"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: detailedAddress
+                  type: TEXT
+                  remarks: "Địa chỉ chi tiết"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: isDefault
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Đặt làm địa chỉ kho mặc định"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: createdAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: "Creation timestamp"
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: updatedAt
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: "Last update timestamp"
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: createdBy
+                  type: VARCHAR(255)
+                  remarks: "Created by"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: updatedBy
+                  type: VARCHAR(255)
+                  remarks: "Updated by"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: isDeleted
+                  type: TINYINT(1)
+                  defaultValue: 0
+                  remarks: "Soft delete flag"
+                  constraints:
+                    nullable: true
+
+              - column:
+                  name: version
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+
+        - addForeignKeyConstraint:
+            baseTableName: warehouse_address
+            baseColumnNames: merchantId
+            referencedTableName: merchant
+            referencedColumnNames: id
+            constraintName: fk_warehouse_address_merchant
+            onDelete: CASCADE
+        - createIndex:
+            indexName: idx_merchant_id
+            tableName: warehouse_address
+            columns:
+              - column:
+                  name: merchantId
+
+        - tagDatabase:
+            tag: warehouse-address_1.0.0
+
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: warehouse_address
+            constraintName: fk_warehouse_address_merchant
+
+        - dropIndex:
+            indexName: idx_merchant_id
+            tableName: warehouse_address
+
+        - dropTable:
+            tableName: warehouse_address

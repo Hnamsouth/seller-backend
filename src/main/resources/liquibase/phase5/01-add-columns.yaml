@@ -1,0 +1,457 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-negotiatedAmount-to-package_product
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: package_product
+              columnName: negotiatedAmount
+      changes:
+        - addColumn:
+            tableName: package_product
+            columns:
+              - column:
+                  name: negotiatedAmount
+                  type: DECIMAL(20,2)
+                  defaultValue: 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-totalNegotiatedAmount-to-order
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: 'order'
+              columnName: totalNegotiatedAmount
+      changes:
+        - addColumn:
+            tableName: 'order'
+            columns:
+              - column:
+                  name: totalNegotiatedAmount
+                  type: DECIMAL(20,2)
+                  defaultValue: 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-sellerOrderStatus-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: sellerOrderStatus
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: sellerOrderStatus
+                  type: ENUM('WAITING_FOR_PAYMENT', 'ORDER_PRICE_ADJUSTED', 'WAITING_FOR_SELLER_CONFIRMATION', 'SELLER_REJECTED_ORDER', 'ORDER_CANCELLED_BY_SELLER', 'WAITING_FOR_ORDER_PREPARATION', 'ORDER_PREPARED', 'ORDER_SHIPMENT_CONNECTION_SUCCESS', 'ORDER_DELIVERED_TO_SHIPPING', 'ORDER_IN_TRANSIT', 'ORDER_COMPLETED')
+                  defaultValue: 'WAITING_FOR_PAYMENT'
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-negotiatedAmount-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: negotiatedAmount
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: negotiatedAmount
+                  type: DECIMAL(20,2)
+                  defaultValue: 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-refCode-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: refCode
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: refCode
+                  type: VARCHAR(50)
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-domesticServiceFeeTotal-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: domesticServiceFeeTotal
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: domesticServiceFeeTotal
+                  type: DECIMAL(20,2)
+                  defaultValue: 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-internationalServiceFeeTotal-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: internationalServiceFeeTotal
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: internationalServiceFeeTotal
+                  type: DECIMAL(20,2)
+                  defaultValue: 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-totalPlatformFee-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: totalPlatformFee
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: totalPlatformFee
+                  type: DECIMAL(10,2)
+                  defaultValue: 0.00
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-totalPrice-to-package_product
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: package_product
+              columnName: totalPrice
+      changes:
+        - addColumn:
+            tableName: package_product
+            columns:
+              - column:
+                  name: totalPrice
+                  type: DECIMAL(20,2)
+        - tagDatabase:
+            tag: p5_1.0.0_1
+
+  - changeSet:
+      id: add-version-column-to-order_package
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_package
+              columnName: VERSION
+      changes:
+        - addColumn:
+            tableName: order_package
+            columns:
+              - column:
+                  name: VERSION
+                  type: INT
+                  defaultValue: 0
+                  remarks: "Version for optimistic locking"
+                  constraints:
+                    nullable: true
+        - tagDatabase:
+            tag: order_package_version_column
+
+  - changeSet:
+      id: 2025-01-06-add-discount-columns
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - and:
+            - not:
+                columnExists:
+                  tableName: package_product
+                  columnName: sellerPlatformDiscountRate
+            - not:
+                columnExists:
+                  tableName: package_product
+                  columnName: sellerPlatformDiscountAmount
+      changes:
+        - addColumn:
+            tableName: package_product
+            columns:
+              - column:
+                  name: sellerPlatformDiscountRate
+                  type: DECIMAL(5,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: sellerPlatformDiscountAmount
+                  type: DECIMAL(20,2)
+                  constraints:
+                    nullable: true
+      comment: "equivalent to product.platformDiscountRate"
+
+  - changeSet:
+      id: add-and-update-merchantGroupId
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - and:
+            - not:
+                columnExists:
+                  tableName: merchant
+                  columnName: merchantGroupId
+      changes:
+        - addColumn:
+            tableName: merchant
+            columns:
+              - column:
+                  name: merchantGroupId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+
+        - update:
+            tableName: merchant
+            columns:
+              - column:
+                  name: merchantGroupId
+                  valueNumeric: 1
+        - tagDatabase:
+            tag: p5-160125
+
+      rollback:
+        - dropColumn:
+            tableName: merchant
+            columnName: merchantGroupId
+
+  - changeSet:
+      id: add-shipmentId-to-order_tracking
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_tracking
+              columnName: shipmentId
+      changes:
+        - addColumn:
+            tableName: order_tracking
+            columns:
+              - column:
+                  name: shipmentId
+                  type: varchar(100)
+                  remarks: "Shipment identifier"
+                  constraints:
+                    nullable: true
+        - tagDatabase:
+            tag: p5-160125
+  - changeSet:
+      id: add-updatedTime-to-order_tracking
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            columnExists:
+              tableName: order_tracking
+              columnName: updatedTime
+      changes:
+        - addColumn:
+            tableName: order_tracking
+            columns:
+              - column:
+                  name: updatedTime
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  remarks: "vipo updatedTime"
+                  constraints:
+                    nullable: true
+        - tagDatabase:
+            tag: p5-160125
+
+  - changeSet:
+      id: create-evtp-order-log-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            tableExists:
+              tableName: evtp_order_log
+      changes:
+        - createTable:
+            tableName: evtp_order_log
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: type
+                  type: VARCHAR(55)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: endpoint
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: orderId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: request
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: response
+                  type: TEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: shipmentCode
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: packageId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdTime
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: true
+        - tagDatabase:
+            tag: p5-18012025
+
+  - changeSet:
+      id: add-shipmentCode-to-evtp_order_log
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - and:
+            - tableExists:
+                tableName: package_product
+            - not:
+                columnExists:
+                  tableName: evtp_order_log
+                  columnName: shipmentCode
+      changes:
+        - addColumn:
+            tableName: evtp_order_log
+            columns:
+              - column:
+                  name: shipmentCode
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+        - tagDatabase:
+            tag: p5-180125
+
+  - changeSet:
+      id: add-packageId-to-evtp_order_log
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - and:
+            - tableExists:
+                tableName: package_product
+            - not:
+                columnExists:
+                  tableName: evtp_order_log
+                  columnName: packageId
+      changes:
+        - addColumn:
+            tableName: evtp_order_log
+            columns:
+              - column:
+                  name: packageId
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+        - tagDatabase:
+            tag: p5-180125
+
+  - changeSet:
+      id: drop-merchantId-index
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: HALT
+        - indexExists:
+            tableName: order_package
+            indexName: merchantId
+      changes:
+        - dropIndex:
+            tableName: order_package
+            indexName: merchantId
+        - tagDatabase:
+            tag: drop-merchantId-index
+
+  - changeSet:
+      id: update-merchantId-index
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - onError: HALT
+        - not:
+            - indexExists:
+                tableName: order_package
+                indexName: idx_merchant_createTime_sellerOrderStatus
+      changes:
+        - createIndex:
+            tableName: order_package
+            indexName: idx_merchant_createTime_sellerOrderStatus
+            columns:
+              - column:
+                  name: merchantId
+              - column:
+                  name: createTime
+        - tagDatabase:
+            tag: update-merchantId-index

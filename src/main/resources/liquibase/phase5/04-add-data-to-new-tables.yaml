@@ -1,0 +1,496 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-init-data-to-seller_order_status-table
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - and:
+          - tableExists:
+              tableName: seller_order_status
+          - sqlCheck:
+              expectedResult: 0
+              sql: "SELECT COUNT(*) FROM seller_order_status"
+      changes:
+        - tagDatabase:
+            tag: p5_1.0.0_4
+
+        # Insert Parent Statuses
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: code
+                  value: PARENT_WAITING_PAYMENT
+              - column:
+                  name: name
+                  value: Chờ thanh toán
+              - column:
+                  name: description
+                  value: Chờ thanh toán
+              - column:
+                  name: parent_id
+                  value: null
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: code
+                  value: PARENT_WAITING_APPROVAL
+              - column:
+                  name: name
+                  value: Chờ duyệt
+              - column:
+                  name: description
+                  value: Chờ duyệt
+              - column:
+                  name: parent_id
+                  value: null
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: code
+                  value: PARENT_WAITING_SHIPMENT
+              - column:
+                  name: name
+                  value: Chờ giao hàng
+              - column:
+                  name: description
+                  value: Chờ giao hàng
+              - column:
+                  name: parent_id
+                  value: null
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: code
+                  value: PARENT_IN_TRANSIT
+              - column:
+                  name: name
+                  value: Đang giao hàng
+              - column:
+                  name: description
+                  value: Đang giao hàng
+              - column:
+                  name: parent_id
+                  value: null
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: code
+                  value: PARENT_DELIVERED
+              - column:
+                  name: name
+                  value: Đã giao hàng
+              - column:
+                  name: description
+                  value: Đã giao hàng
+              - column:
+                  name: parent_id
+                  value: null
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: code
+                  value: PARENT_CANCELLED
+              - column:
+                  name: name
+                  value: Đã hủy đơn hàng # Ensure this is correct
+              - column:
+                  name: description
+                  value: Đã hủy đơn hàng # Ensure this is correct
+              - column:
+                  name: parent_id
+                  value: null
+
+        # Insert Child Statuses
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: WAITING_FOR_PAYMENT
+              - column:
+                  name: name
+                  value: Chờ thanh toán
+              - column:
+                  name: description
+                  value: Đơn hàng đang trong trạng thái chờ người mua thực hiện thanh toán.
+              - column:
+                  name: parent_id
+                  value: 1
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_PRICE_ADJUSTED
+              - column:
+                  name: name
+                  value: Đơn hàng cần điều chỉnh giá
+              - column:
+                  name: description
+                  value: Người bán đã điều chỉnh giá đơn hàng và đang chờ phản hồi từ người mua.
+              - column:
+                  name: parent_id
+                  value: 1
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: WAITING_FOR_SELLER_CONFIRMATION
+              - column:
+                  name: name
+                  value: Chờ xác nhận từ người bán
+              - column:
+                  name: description
+                  value: Đơn hàng đang chờ người bán xác nhận thông tin hoặc nội dung đơn hàng.
+              - column:
+                  name: parent_id
+                  value: 2
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: SELLER_REJECTED_ORDER
+              - column:
+                  name: name
+                  value: Từ chối đơn hàng
+              - column:
+                  name: description
+                  value: Người bán đã từ chối đơn hàng này.
+              - column:
+                  name: parent_id
+                  value: 6
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_CANCELLED_BY_SELLER
+              - column:
+                  name: name
+                  value: Đơn hàng bị hủy bởi người bán
+              - column:
+                  name: description
+                  value: Người bán đã hủy đơn hàng này.
+              - column:
+                  name: parent_id
+                  value: 6
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: WAITING_FOR_ORDER_PREPARATION
+              - column:
+                  name: name
+                  value: Chờ chuẩn bị hàng
+              - column:
+                  name: description
+                  value: Đơn hàng đã được xác nhận và đang trong quá trình chuẩn bị hàng để giao.
+              - column:
+                  name: parent_id
+                  value: 3
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_PREPARED
+              - column:
+                  name: name
+                  value: Đã chuẩn bị hàng
+              - column:
+                  name: description
+                  value: Đơn hàng đã được chuẩn bị xong và sẵn sàng để chuyển đến đơn vị vận chuyển.
+              - column:
+                  name: parent_id
+                  value: 3
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_SHIPMENT_CONNECTION_SUCCESS
+              - column:
+                  name: name
+                  value: Kết nối vận chuyển thành công
+              - column:
+                  name: description
+                  value: Đơn hàng đã được kết nối với đơn vị vận chuyển và đang trong quá trình giao hàng.
+              - column:
+                  name: parent_id
+                  value: 4
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_DELIVERED_TO_SHIPPING
+              - column:
+                  name: name
+                  value: Đã bàn giao cho đơn vị vận chuyển
+              - column:
+                  name: description
+                  value: Đơn hàng đã được chuyển giao cho đơn vị vận chuyển và đang trên đường đến người nhận.
+              - column:
+                  name: parent_id
+                  value: 4
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_IN_TRANSIT
+              - column:
+                  name: name
+                  value: Đang giao hàng
+              - column:
+                  name: description
+                  value: Đơn hàng đang trong quá trình vận chuyển đến địa chỉ người nhận.
+              - column:
+                  name: parent_id
+                  value: 4
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_COMPLETED
+              - column:
+                  name: name
+                  value: Đơn hàng hoàn thành
+              - column:
+                  name: description
+                  value: Đơn hàng đã được giao thành công và quá trình xử lý đơn hàng đã kết thúc.
+              - column:
+                  name: parent_id
+                  value: 5
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_CANCELLED_BY_CUSTOMER
+              - column:
+                  name: name
+                  value: Hủy bởi khách hàng
+              - column:
+                  name: description
+                  value: Khách hàng đã hủy đơn hàng này.
+              - column:
+                  name: parent_id
+                  value: 6
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_CANCELLED_BY_VTP
+              - column:
+                  name: name
+                  value: Hủy bởi VIPO
+              - column:
+                  name: description
+                  value: Đơn hàng bị hủy bởi VTP
+              - column:
+                  name: parent_id
+                  value: 6
+        - insert:
+            tableName: seller_order_status
+            columns:
+              - column:
+                  name: code
+                  value: ORDER_CANCELLED_BY_VIPO
+              - column:
+                  name: name
+                  value: Hủy bởi VIPO
+              - column:
+                  name: description
+                  value: Đơn Hàng bị hủy bởi VIPO
+              - column:
+                  name: parent_id
+                  value: 6
+  - changeSet:
+      id: init-carriers
+      author: anhdev
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM carrier
+      changes:
+        - insert:
+            tableName: carrier
+            columns:
+              - column:
+                  name: carrierCode
+                  value: AHA001
+              - column:
+                  name: name
+                  value: AhaMove
+              - column:
+                  name: contactInfo
+                  value: support@aha.com
+              - column:
+                  name: createdAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: updatedAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: createdBy
+                  value: null
+              - column:
+                  name: updatedBy
+                  value: null
+              - column:
+                  name: isDeleted
+                  valueNumeric: 0
+              - column:
+                  name: version
+                  valueNumeric: 1
+        - insert:
+            tableName: carrier
+            columns:
+              - column:
+                  name: carrierCode
+                  value: GHTK001
+              - column:
+                  name: name
+                  value: Giao hàng tiết kiệm
+              - column:
+                  name: contactInfo
+                  value: support@ghtk.com
+              - column:
+                  name: createdAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: updatedAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: createdBy
+                  value: null
+              - column:
+                  name: updatedBy
+                  value: null
+              - column:
+                  name: isDeleted
+                  valueNumeric: 0
+              - column:
+                  name: version
+                  valueNumeric: 1
+        - insert:
+            tableName: carrier
+            columns:
+              - column:
+                  name: carrierCode
+                  value: VTP001
+              - column:
+                  name: name
+                  value: Viettel Post
+              - column:
+                  name: contactInfo
+                  value: support@vtpost.com
+              - column:
+                  name: createdAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: updatedAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: createdBy
+                  value: null
+              - column:
+                  name: updatedBy
+                  value: null
+              - column:
+                  name: isDeleted
+                  valueNumeric: 0
+              - column:
+                  name: version
+                  valueNumeric: 1
+        - insert:
+            tableName: carrier
+            columns:
+              - column:
+                  name: carrierCode
+                  value: VNPOST001
+              - column:
+                  name: name
+                  value: Việt Nam Post
+              - column:
+                  name: contactInfo
+                  value: support@vnpost.vn
+              - column:
+                  name: createdAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: updatedAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: createdBy
+                  value: null
+              - column:
+                  name: updatedBy
+                  value: null
+              - column:
+                  name: isDeleted
+                  valueNumeric: 0
+              - column:
+                  name: version
+                  valueNumeric: 1
+        - insert:
+            tableName: carrier
+            columns:
+              - column:
+                  name: carrierCode
+                  value: JTEX001
+              - column:
+                  name: name
+                  value: J&T Express
+              - column:
+                  name: contactInfo
+                  value: support@jtexpress.vn
+              - column:
+                  name: createdAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: updatedAt
+                  valueDate: 2024-12-17T13:50:24
+              - column:
+                  name: createdBy
+                  value: null
+              - column:
+                  name: updatedBy
+                  value: null
+              - column:
+                  name: isDeleted
+                  valueNumeric: 0
+              - column:
+                  name: version
+                  valueNumeric: 1

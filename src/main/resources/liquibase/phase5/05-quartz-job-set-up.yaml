@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: quartz-init
+      author: anhdev
+      changes:
+        - sqlFile:
+            path: sql/tables_mysql_innodb.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            endDelimiter: ";"

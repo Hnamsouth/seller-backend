@@ -1,0 +1,109 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-isDeleted-column-to-seller-tables
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        and:
+          - not:
+              columnExists:
+                columnName: isDeleted
+                tableName: seller_attribute
+          - not:
+              columnExists:
+                columnName: isDeleted
+                tableName: seller_classify
+          - not:
+              columnExists:
+                columnName: isDeleted
+                tableName: product_seller_sku
+      changes:
+        - addColumn:
+            tableName: seller_attribute
+            columns:
+              - column:
+                  name: isDeleted
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: "Indicates if the record is deleted"
+        - addColumn:
+            tableName: seller_classify
+            columns:
+              - column:
+                  name: isDeleted
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: "Indicates if the record is deleted"
+        - addColumn:
+            tableName: product_seller_sku
+            columns:
+              - column:
+                  name: isDeleted
+                  type: BOOLEAN
+                  defaultValue: false
+                  remarks: "Indicates if the record is deleted"
+        - tagDatabase:
+            tag: product_approval_1.0.2
+      rollback:
+        - dropColumn:
+            tableName: seller_attribute
+            columnName: isDeleted
+        - dropColumn:
+            tableName: seller_classify
+            columnName: isDeleted
+        - dropColumn:
+            tableName: product_seller_sku
+            columnName: isDeleted
+
+  - changeSet:
+      id: product-approval-adding-ref-to-main-tables-from-temp-tables
+      author: anhdev
+      preConditions:
+        onFail: MARK_RAN
+        and:
+          - not:
+              columnExists:
+                columnName: sellerAttributeId
+                tableName: seller_attribute_temporary
+          - not:
+              columnExists:
+                columnName: sellerClassifyId
+                tableName: seller_classify_temporary
+          - not:
+              columnExists:
+                columnName: productSellerSkuId
+                tableName: product_seller_sku_temporary
+      changes:
+        - addColumn:
+            tableName: seller_attribute_temporary
+            columns:
+              - column:
+                  name: sellerAttributeId
+                  type: BIGINT
+                  remarks: 'id bảng seller_attribute'
+        - addColumn:
+            tableName: seller_classify_temporary
+            columns:
+              - column:
+                  name: sellerClassifyId
+                  type: BIGINT
+                  remarks: 'id bảng seller_classify'
+        - addColumn:
+            tableName: product_seller_sku_temporary
+            columns:
+              - column:
+                  name: productSellerSkuId
+                  type: BIGINT
+                  remarks: 'id bảng seller_classify'
+        - tagDatabase:
+            tag: product_approval_1.0.2
+      rollback:
+        - dropColumn:
+            tableName: seller_attribute_temporary
+            columnName: sellerAttributeId
+        - dropColumn:
+            tableName: seller_classify_temporary
+            columnName: sellerClassifyId
+        - dropColumn:
+            tableName: product_seller_sku_temporary
+            columnName: productSellerSkuId

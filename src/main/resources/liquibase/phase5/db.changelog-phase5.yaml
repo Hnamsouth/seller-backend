@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/phase5/01-add-columns.yaml
+  - include:
+      file: liquibase/phase5/02-update-data.yaml
+  - include:
+      file: liquibase/phase5/03-create-tables.yaml
+  - include:
+      file: liquibase/phase5/04-add-data-to-new-tables.yaml
+  - include:
+      file: liquibase/phase5/05-quartz-job-set-up.yaml
+  - include:
+      file: liquibase/phase5/06-retries-message.yaml
