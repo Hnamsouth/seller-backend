@@ -16,6 +16,10 @@ jobs:
   build:
 
     runs-on: self-hosted
+    strategy:
+      matrix:
+        maven: ['3.9.9' ]
+        java: ['17', '21' ]
 
     steps:
     - uses: actions/checkout@v4
@@ -26,8 +30,11 @@ jobs:
         distribution: 'temurin'
         cache: maven
   # Cài đặt Maven
-    - name: Set up Maven
-      uses: actions/setup-maven@v2  # Cài đặt Maven từ GitHub Actions
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@3
+      with:
+        java-version: '17'
+        maven-version: ${{ matrix.maven }}
 
     # Build với Maven
     - name: Build with Maven
